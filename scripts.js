@@ -41,7 +41,7 @@ $newPost.on("submit", function() {
 
 	console.log(Post.all);
 
-	// $newPost[0].reset();
+	$newPost[0].reset();
 });
 
 });
