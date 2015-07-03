@@ -1,0 +1,12 @@
+#new-image {
+	border-radius: 25px;
+}
+.jumbotron {
+	text-align: center;
+	color: white;
+	background: black;
+	font-family: "Courier New", Courier, monospace;
+}
+body {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
