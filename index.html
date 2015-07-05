@@ -36,7 +36,7 @@
 					Image URL
 				</div>
 				<div class="margin-top-20">
-					<input id="new-image" type="text" class="form-control" />
+					<input id="new-image" type="text" class="form-control" autofocus />
 				</div>
 				<div class="bold margin-top-20">
 					Title
@@ -69,11 +69,12 @@
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h4 class="modal-title">New Comment</h4>
 			</div>
+				<form id="comment-modal-form">
 				<div class="bold margin-top-20">
 					Rating
 				</div>
 				<div class="margin-top-20">
-					<select class="form-control">
+					<select id="new-rating" class="form-control">
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
@@ -90,12 +91,14 @@
 					Comment
 				</div>
 				<div class="margin-top-20">
-					<input id="comments" type="text" class="form-control" />
+					<input id="new-comment" type="text" class="form-control" autofocus />
 				</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button id="save-book" type="button" class="btn btn-primary">Save Comment</button>
+				<button id="save-book" type="submit" class="btn btn-primary">Save Comment</button>
+			</div>
+			</form>
 			</div>
 		</div>
 	</div>
@@ -103,12 +106,13 @@
 <!--/Add Comment Modal-->
 
 	<div class="container">
-		<div id="post-list"></div>
+		<div class="col-xs-9" id="post-list"></div>
+		<div class="col-xs-3" id="comment-list"</div>
 
 	<script type="text/template" id="post-template">
 	<div class="row margin-top-20 post-container">
 		<div class="col-xs-3">
-			<img src= "<%= image %>" class="img-responsive" id="new-image" />
+			<img width="150" height="150" src= "<%= image %>" class="img-responsive" id="new-image" />
 			<br><br>
 		</div>
 		<div class="col-xs-9">
@@ -126,19 +130,25 @@
 		</div>
 	</div>
 	</script>
+	<script type="text/template" id="comment-template">
+	<div class="col-xs-6 col-xs-offset-3">
+		<div class="margin-top-20">
+			<div>
+				<span class="bold">Rating: </span><span>"<%= rating %>"</span>
+			</div>
+			<div>
+				<span class="bold">Comment: </span><span>"<%= comment %>"</span>
+			</div>
+			<br>
+		</div>
+	</div>
+	</script>
 
 	</div>
 
 	<nav class="navbar navbar-default navbar-fixed-bottom">
 		<div class="container">
-			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
 			<a class="navbar-brand">Sabastian Belser</a>
 		</div>
 

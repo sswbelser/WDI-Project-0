@@ -7,6 +7,9 @@
 	background: black;
 	font-family: "Courier New", Courier, monospace;
 }
-body {
+#post-list {
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+#comment-list {
+	font-family: Tahoma, Geneva, sans-serif;
 }
