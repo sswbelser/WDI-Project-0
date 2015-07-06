@@ -6,6 +6,7 @@ $(function() {
 	var $commentList = $("#comment-list");
 	var postTemplate = _.template($("#post-template").html());
 	var commentTemplate = _.template($("#comment-template").html());
+
 	var totalPosts = 0
 
 	var Post = function(image, title, body) {
@@ -39,6 +40,7 @@ $(function() {
 		var $post = $(postTemplate(this));
 		$post.attr("data-index", postIndex);
 		$postList.append($post);
+
 	}
 
 	Comment.prototype.render = function() {
@@ -54,6 +56,9 @@ $(function() {
 		var postTitle = $("#new-title").val();
 		var postBody = $("#new-body").val();
 		var newPost = new Post(postImage, postTitle, postBody);
+
+		totalPosts++;
+		$("#counter").html(totalPosts + " total posts");
 
 		newPost.save();
 		newPost.render();
