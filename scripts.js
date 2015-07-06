@@ -1,4 +1,5 @@
 $(function() {
+	// Variables declared and fixed to various IDs
 	var $newPost = $("#modal-form");
 	var $newComment = $("#comment-modal-form");
 	var $postList = $("#post-list");
@@ -65,7 +66,7 @@ $(function() {
 	$newComment.on("submit", function () {
 		event.preventDefault();
 		var commentRating = $("#new-rating").val();
-		var commentComment = $("new-comment").val();
+		var commentComment = $("#new-comment").val();
 		var newComment = new Comment(commentRating, commentComment);
 
 		newComment.save();
