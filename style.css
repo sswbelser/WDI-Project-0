@@ -1,5 +1,7 @@
 #new-image {
 	border-radius: 25px;
+	padding:1px;
+	border:1px solid white;
 }
 .jumbotron {
 	text-align: center;
@@ -12,4 +14,9 @@
 }
 #comment-list {
 	font-family: Tahoma, Geneva, sans-serif;
+}
+body {
+	background-image: url(http://wallfoy.com/wp-content/uploads/2014/03/Light-Blue-Wallpaper-83.jpg);
+	background-size: cover;
+	font-style: bold;
 }
