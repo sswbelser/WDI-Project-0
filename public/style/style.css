@@ -1,7 +1,8 @@
-#new-image {
+/*CSS*/
+#new-image-template {*/
 	border-radius: 25px;
 	padding:1px;
-	border:1px solid white;
+	border:1px solid black;
 }
 .jumbotron {
 	text-align: center;
