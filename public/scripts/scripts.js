@@ -4,7 +4,7 @@ $(function() {
 var postController = {
 
 	// Variables declared and fixed to various IDs
-	var $newPost = $("#modal-form");
+	// var $newPost = $("#modal-form");
 	var $newComment = $("#comment-modal-form");
 	var $postList = $("#post-list");
 	var $commentList = $("#comment-list");
