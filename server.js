@@ -4,7 +4,11 @@
 var express = require("express"),
 	app = express(),
 	bodyParser = require("body-parser"),
-	_ = require("underscore");
+	_ = require("underscore"),
+	mongoose = require("mongoose");
+
+mongoose.connect("mongodb://localhost/allposts");
+var Post = require("./models/data.js");
 
 // serve js and css files from public folder
 app.use(express.static(__dirname + "/public"));
@@ -13,9 +17,9 @@ app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: true}));
 
 var postArray = [
-{id: 1, image: "http://images.akamai.steamusercontent.com/ugc/882976651020486774/F265CB501950E8EE518F253483B756C29F4C1004/", title: "Shovel Knight", body: "Sample game description goes here."},
-{id: 2, image: "http://edge.alluremedia.com.au/m/k/2013/02/Super-Meat-Boy.jpeg", title: "Super Meat Boy", body: "More details describing game."},
-{id: 3, image: "http://www.amnesiagame.com/images/splash_main.jpg", title: "Amnesia: The Dark Descent", body: "Details about this epic horror game."}
+// {id: 1, image: "http://images.akamai.steamusercontent.com/ugc/882976651020486774/F265CB501950E8EE518F253483B756C29F4C1004/", title: "Shovel Knight", body: "Sample game description goes here."},
+// {id: 2, image: "http://edge.alluremedia.com.au/m/k/2013/02/Super-Meat-Boy.jpeg", title: "Super Meat Boy", body: "More details describing game."},
+// {id: 3, image: "http://www.amnesiagame.com/images/splash_main.jpg", title: "Amnesia: The Dark Descent", body: "Details about this epic horror game."}
 ];
 var totalPostCount = 3;
 
