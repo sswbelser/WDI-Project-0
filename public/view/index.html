@@ -19,14 +19,35 @@
 	<div class="jumbotron">
 		<h1>Beta Connect</h1>
 		<p>One-stop shop connecting Steam Early Access game developers with beta testers and players</p>
-		<p><a href="#" data-toggle="modal" data-target="#add-post-modal" class="btn btn-success">New Post</a></p>
+		<p><a data-toggle="modal" data-target="#add-post-modal" class="btn btn-success">New Post</a></p>
 		<hr>
 		<div id="counter"></div>
 	</div>
 </header>
 
+<div class="container">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-4">
+			<form class="form-inline" id="new-post">
+				<div>
+					<input type="text" class="form-control" id="new-image" placeholder="New image URL" autofocus>
+				</div>
+				<div>
+					<input type="text" class="form-control" id="new-title" placeholder="New game title">
+				</div>
+				<div>
+					<textarea class="form-control" id="new-body" rows="5" placeholder="Describe the game" required></textarea>
+				</div>
+				<div>
+					<input type="submit" class="btn btn-success" value="Add Game">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
 <!--Add Post Modal-->
-<div id="add-post-modal" class="modal fade">
+<!-- <div id="add-post-modal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -35,7 +56,7 @@
 			</div>
 			<div class="modal-body">
 
-			<form id="modal-form">
+			<form id="new-post">
 				<div class="bold">
 					Image URL
 				</div>
@@ -62,11 +83,11 @@
 			</form>
 		</div>
 	</div>
-</div>
+</div> -->
 <!--/Add Post Modal-->
 
 <!-- View Comment Modal -->
-<div id="view-comment-modal" class="modal fade">
+<!-- <div id="view-comment-modal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -77,10 +98,10 @@
 			<button type="button" data-dismiss="modal" data-toggle="modal" data-target="#add-comment-modal" class="btn btn-primary">New Comment</button>
 		</div>
 	</div>
-</div>
+</div> -->
 
 <!--Add Comment Modal-->
-<div id="add-comment-modal" class="modal fade">
+<!-- <div id="add-comment-modal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -120,7 +141,7 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div> -->
 <!--/Add Comment Modal-->
 
 
@@ -135,40 +156,44 @@
 <!-- Underscore template -->
 	<script type="text/template" id="post-template">
 	<div class="post-container">
-		<div class="panel panel-success">
+		<div class="panel panel-success" id="post-<%= _id %>"> 
 			<div class="panel-heading">
 				<h3 class="panel-title">"<%= title %>"</h3>
 			</div>
 			<div class="panel-body">
+				<span class="my-button-group">
+					<button class="close right-side delete-post" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<a class="edit-pencil" role="button" data-toggle="collapse" data-target="#update-<%= _id %>">
+						<span class="glyphicon glyphicon-pencil edit"></span>
+					</a>
+					<br>
+				</span>
 				<div class="col-sm-3">
 					<img width="150" height="150" src= "<%= image %>" class="img-responsive" id="new-image-template" />
 				</div>
-				<div class="col-xs-9">
+				<div class="col-sm-9">
 					<p>"<%= body %>"</p>
 				</div>
-				<br><hr>
-				<p>
-					<a href="#" data-toggle="modal" data-target="#view-comment-modal" class="btn btn-primary">View Comments</a>
-					// (Delete button here eventually)
-				</p>
+				<div class="collapse" id="update-<%= _id %>">
+				<br>
+				<form class="form-inline update-post">
+					<input type="text" class="form-control updated-image" value="<%= image %>" placeholder="New image URL">
+					<input type="text" class="form-control updated-title" value="<%= title %>" placeholder="New game title">
+					<input type="text" class="form-control updated-body" value="<%= body %>" placeholder="New game description">
+					<input type="submit" class="btn btn-primary" value="Update post">
+				</form>
+				<div class="comment-list" id="comments=<%= _id %>">
+				</div>
 			</div>
 		</div>
 	</div>
 	</script>
-	<script type="text/template" id="comment-template">
-	<div class="col-xs-6 col-xs-offset-3">
-		<div class="margin-top-20">
-			<div>
-				<span class="bold">Rating: </span><span>"<%= rating %>"</span>
-			</div>
-			<div>
-				<span class="bold">Comment: </span><span>"<%= comment %>"</span>
-			</div>
-			<br>
-		</div>
-		</div>
-	</div>
-	</script>
+
+
+<!-- 					<a data-toggle="modal" data-target="#view-comment-modal" class="btn btn-primary">View Comments</a> -->
+
 
 <!-- Navbar - fixed to top -->
 	<nav class="navbar navbar-default navbar-fixed-top">

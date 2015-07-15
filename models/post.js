@@ -8,6 +8,6 @@ var PostSchema = new Schema({
 	body: String
 });
 
-var Post = mongoose.model("Post", PostSchema);
+var Post = mongoose.model("Post", PostSchema, "allposts");
 
 module.exports = Post;
