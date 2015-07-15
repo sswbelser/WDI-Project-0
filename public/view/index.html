@@ -135,7 +135,7 @@
 <!-- Underscore template -->
 	<script type="text/template" id="post-template">
 	<div class="post-container">
-		<div class="panel panel-success" id="post-<%= _id %>"> 
+		<div class="post panel panel-success" id="post-<%= _id %>" data-id="<%= _id %>"> 
 			<div class="panel-heading">
 				<h3 class="panel-title">"<%= title %>"</h3>
 			</div>
@@ -165,7 +165,7 @@
 					<input type="text" class="form-control updated-image" value="<%= image %>" placeholder="Update image URL">
 					<input type="text" class="form-control updated-title" value="<%= title %>" placeholder="Update game title">
 					<textarea class="form-control updated-body" rows="5" value="<%= body %>" placeholder="Update game description"></textarea>
-					<input type="submit" class="btn btn-primary" value="Update post">
+					<input type="submit" class="btn btn-danger" value="Submit update">
 				</form>
 				<div class="comment-list" id="comments=<%= _id %>">
 				</div>

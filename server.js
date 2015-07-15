@@ -8,7 +8,6 @@ var express = require("express"),
 	mongoose = require("mongoose"),
 	db = require("./models/post");
 
-// var posts = require("./models/post");
 var Post = require("./models/post")
 mongoose.connect("mongodb://localhost/test");
 
@@ -67,20 +66,32 @@ app.post("/api/posts", function (req, res) {
 });
 
 app.put("/api/posts/:id", function (req, res) {
-	var targetId = req.params._id;
+	var targetId = req.params.id;
+	console.log(targetId);
 	Post.findOne({_id: targetId}, function (err, foundPost) {
 		console.log(foundPost);
 		if (err) {
-			console.log("Error: " + err)
+			console.log("Error: " + err);
 			res.status(500).send(err);
 		} else {
-			res.json(foundPost);
+			foundPost.image = req.body.image;
+			foundPost.title = req.body.title;
+			foundPost.body = req.body.body;
+			foundPost.save(function (err, savedPost) {
+				if (err) {
+					console.log("Error: " + err);
+					res.status(500).send(err);
+				} else {
+					res.json(savedPost);
+				}
+			})
 		}
 	})
 });
 
 app.delete("/api/posts/:id", function (req, res) {
-	var targetId = req.params._id;
+	var targetId = req.params.id;
+	console.log(targetId);
 	Post.findOneAndRemove({_id: targetId}, function (err, deletedPost) {
 		if (err) {
 			console.log("Error: ",  + err);
