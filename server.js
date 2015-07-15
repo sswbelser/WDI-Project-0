@@ -36,7 +36,7 @@ app.get("/api/posts", function (req, res) {
 });
 
 app.get("/api/posts/:id", function (req, res) {
-	var targetId = req.params.id;
+	var targetId = req.params._id;
 	Post.fineOne({_id: targetId}, function (err, foundPost) {
 		console.log(foundPost);
 		if (err) {
@@ -55,7 +55,6 @@ app.post("/api/posts", function (req, res) {
 		title: req.body.title,
 		body: req.body.body
 	});
-	totalPostCount++;
 	newPost.save(function (err, savedPost) {
 		if (err) {
 			console.log("Error: " + err);
@@ -68,7 +67,7 @@ app.post("/api/posts", function (req, res) {
 });
 
 app.put("/api/posts/:id", function (req, res) {
-	var targetId = req.params.id;
+	var targetId = req.params._id;
 	Post.findOne({_id: targetId}, function (err, foundPost) {
 		console.log(foundPost);
 		if (err) {
@@ -81,7 +80,7 @@ app.put("/api/posts/:id", function (req, res) {
 });
 
 app.delete("/api/posts/:id", function (req, res) {
-	var targetId = req.params.id;
+	var targetId = req.params._id;
 	Post.findOneAndRemove({_id: targetId}, function (err, deletedPost) {
 		if (err) {
 			console.log("Error: ",  + err);

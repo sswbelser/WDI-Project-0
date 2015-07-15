@@ -25,29 +25,8 @@
 	</div>
 </header>
 
-<div class="container">
-	<div class="row">
-		<div class="col-md-8 col-md-offset-4">
-			<form class="form-inline" id="new-post">
-				<div>
-					<input type="text" class="form-control" id="new-image" placeholder="New image URL" autofocus>
-				</div>
-				<div>
-					<input type="text" class="form-control" id="new-title" placeholder="New game title">
-				</div>
-				<div>
-					<textarea class="form-control" id="new-body" rows="5" placeholder="Describe the game" required></textarea>
-				</div>
-				<div>
-					<input type="submit" class="btn btn-success" value="Add Game">
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
-
 <!--Add Post Modal-->
-<!-- <div id="add-post-modal" class="modal fade">
+<div id="add-post-modal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -78,12 +57,12 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button id="save-post" type="submit" class="btn btn-primary">Save Post</button>
+				<input type="submit" class="btn btn-success" value="Add Game">
 			</div>
 			</form>
 		</div>
 	</div>
-</div> -->
+</div>
 <!--/Add Post Modal-->
 
 <!-- View Comment Modal -->
@@ -176,12 +155,16 @@
 				<div class="col-sm-9">
 					<p>"<%= body %>"</p>
 				</div>
+				<div>
+					<a data-toggle="modal" data-target="#add-comment-modal" class="btn btn-primary">Add Comment
+					</a>
+				</div>
 				<div class="collapse" id="update-<%= _id %>">
 				<br>
 				<form class="form-inline update-post">
-					<input type="text" class="form-control updated-image" value="<%= image %>" placeholder="New image URL">
-					<input type="text" class="form-control updated-title" value="<%= title %>" placeholder="New game title">
-					<input type="text" class="form-control updated-body" value="<%= body %>" placeholder="New game description">
+					<input type="text" class="form-control updated-image" value="<%= image %>" placeholder="Update image URL">
+					<input type="text" class="form-control updated-title" value="<%= title %>" placeholder="Update game title">
+					<textarea class="form-control updated-body" rows="5" value="<%= body %>" placeholder="Update game description"></textarea>
 					<input type="submit" class="btn btn-primary" value="Update post">
 				</form>
 				<div class="comment-list" id="comments=<%= _id %>">
@@ -190,10 +173,6 @@
 		</div>
 	</div>
 	</script>
-
-
-<!-- 					<a data-toggle="modal" data-target="#view-comment-modal" class="btn btn-primary">View Comments</a> -->
-
 
 <!-- Navbar - fixed to top -->
 	<nav class="navbar navbar-default navbar-fixed-top">
