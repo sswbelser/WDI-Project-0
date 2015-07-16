@@ -24,7 +24,7 @@ app.get("/", function (req, res) {
 });
 
 app.get("/api/posts", function (req, res) {
-	Post.find(function (err, allposts) {
+	db.Post.find(function (err, allposts) {
 		if (err) {
 			console.log("Error: " + err);
 			res.status(500).send(err);
@@ -36,7 +36,7 @@ app.get("/api/posts", function (req, res) {
 
 app.get("/api/posts/:id", function (req, res) {
 	var targetId = req.params._id;
-	Post.fineOne({_id: targetId}, function (err, foundPost) {
+	db.Post.fineOne({_id: targetId}, function (err, foundPost) {
 		console.log(foundPost);
 		if (err) {
 			console.log("Error: " + err);
@@ -49,7 +49,7 @@ app.get("/api/posts/:id", function (req, res) {
 });
 
 app.post("/api/posts", function (req, res) {
-	var newPost = new Post({
+	var newPost = new db.Post({
 		image: req.body.image,
 		title: req.body.title,
 		body: req.body.body
@@ -68,7 +68,7 @@ app.post("/api/posts", function (req, res) {
 app.put("/api/posts/:id", function (req, res) {
 	var targetId = req.params.id;
 	console.log(targetId);
-	Post.findOne({_id: targetId}, function (err, foundPost) {
+	db.Post.findOne({_id: targetId}, function (err, foundPost) {
 		console.log(foundPost);
 		if (err) {
 			console.log("Error: " + err);
@@ -92,7 +92,7 @@ app.put("/api/posts/:id", function (req, res) {
 app.delete("/api/posts/:id", function (req, res) {
 	var targetId = req.params.id;
 	console.log(targetId);
-	Post.findOneAndRemove({_id: targetId}, function (err, deletedPost) {
+	db.Post.findOneAndRemove({_id: targetId}, function (err, deletedPost) {
 		if (err) {
 			console.log("Error: ",  + err);
 			res.status(500).send(err);
@@ -101,6 +101,20 @@ app.delete("/api/posts/:id", function (req, res) {
 		}
 	});
 });
+
+app.get("/api/posts/:postid/comments", function (req, res) {
+	db.Post.findOne({_id: req.params.postid}, function (err, post) {
+		res.json(post.comments);
+	});
+});
+
+app.post("/api/posts/:postid/comments", function (req, res) {
+	db.Post.findOne({_id: req.params.postid}, function (err, post) {
+		var newComment = new db.Comment({text: req.body.text});
+		post.comments.push(newComment);
+		res.json(newComment);
+	})
+})
 
 // listen on port 3000
 app.listen(3000, function() {
