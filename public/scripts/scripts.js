@@ -2,109 +2,112 @@
 
 $(function() {
 
-  // `postsController` holds all our post funtionality
-  var postsController = {
+	var totalPosts = 1
+	$('#counter').html(totalPosts + ' total posts')
+
+	// `postsController` holds all our post funtionality
+	var postsController = {
     
-    // compile post template
-    template: _.template($('#post-template').html()),
+		// compile post template
+		template: _.template($('#post-template').html()),
 
-    all: function() {
-      $.get('/api/posts', function(data) {
-        var allPosts = data;
-        
-        // iterate through allPosts
-        _.each(allPosts, function(post) {
-          // pass each post object through template and append to view
-          var $postHtml = $(postsController.template(post));
-          $('#post-list').append($postHtml);
-        });
-        // add event-handlers to posts for updating/deleting
-        postsController.addEventHandlers();
-      });
-    },
+		all: function() {
+			$.get('/api/posts', function(data) {
+				var allPosts = data;
+				// iterate through allPosts
+				_.each(allPosts, function(post) {
+					// pass each post object through template and append to view
+					var $postHtml = $(postsController.template(post));
+					$('#post-list').append($postHtml);
+				});
+				// add event-handlers to posts for updating/deleting
+				postsController.addEventHandlers();
+			});
+		},
 
-    create: function(newImage, newTitle, newBody) {
-      var postData = {image: newImage, title: newTitle, body: newBody};
-      // send POST request to server to create new post
-      $.post('/api/posts', postData, function(data) {
-        // pass post object through template and append to view
-        var $postHtml = $(postsController.template(data));
-        $('#post-list').append($postHtml);
-      });
-    },
+		create: function(newImage, newTitle, newBody) {
+			var postData = {image: newImage, title: newTitle, body: newBody};
+			// send POST request to server to create new post
+			$.post('/api/posts', postData, function(data) {
+				// pass post object through template and append to view
+				var $postHtml = $(postsController.template(data));
+				$('#post-list').append($postHtml);
+				totalPosts++;
+				$('#counter').html(totalPosts + ' total posts');
+			});
+		},
 
-    update: function(postId, updatedImage, updatedTitle, updatedBody) {
-      // send PUT request to server to update post
-      $.ajax({
-        type: 'PUT',
-        url: '/api/posts/' + postId,
-        data: {
-          image: updatedImage,
-          title: updatedTitle,
-          body: updatedBody
-        },
-        success: function(data) {
-          // pass post object through template and append to view
-          var $postHtml = $(postsController.template(data));
-          $('#post-' + postId).replaceWith($postHtml);
-        }
-      });
-    },
+		update: function(postId, updatedImage, updatedTitle, updatedBody) {
+			// send PUT request to server to update post
+			$.ajax({
+				type: 'PUT',
+				url: '/api/posts/' + postId,
+				data: {
+					image: updatedImage,
+					title: updatedTitle,
+					body: updatedBody
+				},
+				success: function(data) {
+					// pass post object through template and append to view
+					var $postHtml = $(postsController.template(data));
+					$('#post-' + postId).replaceWith($postHtml);
+				}
+			});
+		},
     
-    delete: function(postId) {
-      // send DELETE request to server to delete post
-      $.ajax({
-        type: 'DELETE',
-        url: '/api/posts/' + postId,
-        success: function(data) {
-          // remove deleted post li from the view
-          $('#post-' + postId).remove();
-        }
-      });
-    },
+		delete: function(postId) {
+			// send DELETE request to server to delete post
+			$.ajax({
+				type: 'DELETE',
+				url: '/api/posts/' + postId,
+				success: function(data) {
+					// remove deleted post li from the view
+					$('#post-' + postId).remove();
+					totalPosts--;
+					$('#counter').html(totalPosts + ' total posts');
+				}
+			});
+		},
 
-    // add event-handlers to posts for updating/deleting
-    addEventHandlers: function() {
-      $('#post-list')
-        // for update: submit event on `.update-post` form
-        .on('submit', '.update-post', function(event) {
-          event.preventDefault();
-          var postId = $(this).closest('.post').attr('data-id');
-          var updatedImage = $(this).find('.updated-image').val();
-          var updatedTitle = $(this).find('.updated-title').val();
-          var updatedBody = $(this).find('.updated-body').val();
-          postsController.update(postId, updatedImage, updatedTitle, updatedBody);
-        })
-        // for delete: click event on `.delete-post` button
-        .on('click', '.delete-post', function(event) {
-          event.preventDefault();
-          var postId = $(this).closest('.post').attr('data-id');
-          postsController.delete(postId);
-        });
-    },
+		// add event-handlers to posts for updating/deleting
+		addEventHandlers: function() {
+			$('#post-list')
+			// for update: submit event on `.update-post` form
+			.on('submit', '.update-post', function(event) {
+				event.preventDefault();
+				var postId = $(this).closest('.post').attr('data-id');
+				var updatedImage = $(this).find('.updated-image').val();
+				var updatedTitle = $(this).find('.updated-title').val();
+				var updatedBody = $(this).find('.updated-body').val();
+				postsController.update(postId, updatedImage, updatedTitle, updatedBody);
+			})
+			// for delete: click event on `.delete-post` button
+			.on('click', '.delete-post', function(event) {
+				event.preventDefault();
+				var postId = $(this).closest('.post').attr('data-id');
+				postsController.delete(postId);
+			});
+		},
 
-    setupView: function() {
-      // append existing posts to view
-      postsController.all();
-      
-      // add event-handler to new-post form
-      $('#new-post').on('submit', function(event) {
-        event.preventDefault();
-        var newImage = $('#new-image').val();
-        var newTitle = $('#new-title').val();
-        var newBody = $('#new-body').val();
-        postsController.create(newImage, newTitle, newBody);
-        
-        // reset the form
-        $(this)[0].reset();
-      });
-    }
-  };
+		setupView: function() {
+			// append existing posts to view
+			postsController.all();
+			// add event-handler to new-post form
+			$('#new-post').on('submit', function(event) {
+				event.preventDefault();
+				var newImage = $('#new-image').val();
+				var newTitle = $('#new-title').val();
+				var newBody = $('#new-body').val();
+				postsController.create(newImage, newTitle, newBody);
+				// reset the form
+				$(this)[0].reset();
+			});
+		}
+	};
 
-  postsController.setupView();
+	postsController.setupView();
 
 });
-
 
 
 // $(function() {

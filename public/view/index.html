@@ -14,56 +14,77 @@
 	<link rel="stylesheet" href="style/style.css" />
 </head>
 <body>
-<!-- Jumbotron -->
-<header>
-	<div class="jumbotron">
-		<h1>Beta Connect</h1>
-		<p>One-stop shop connecting Steam Early Access game developers with beta testers and players</p>
-		<p><a data-toggle="modal" data-target="#add-post-modal" class="btn btn-success">New Post</a></p>
-		<hr>
-		<div id="counter"></div>
-	</div>
-</header>
 
-<!--Add Post Modal-->
-<div id="add-post-modal" class="modal fade">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">New Post</h4>
+	<!-- Navbar - fixed to top -->
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand">Sabastian Belser</a>
 			</div>
-			<div class="modal-body">
+			<div class="collapse navbar-collapse" id="bs-example-navcollapse-1">
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Info<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="https://github.com/sswbelser">GitHub</a></li>
+							<li><a href="https://twitter.com/sswbelser">Twitter</a></li>
+							<li><a href="https://www.facebook.com/sswbelser">Facebook</a></li>
+							<li><a href="https://www.linkedin.com/in/sabastianbelser">LinkedIn</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="http://www.rockheadandquarry.com/">Rockhead & Quarry, LLC</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 
-			<form id="new-post">
-				<div class="bold">
-					Image URL
+	<!-- Jumbotron -->
+	<header>
+		<div class="jumbotron">
+			<h1>Beta Connect</h1>
+			<p>One-stop shop connecting Steam Early Access game developers with beta testers and players</p>
+			<p>
+				<a data-toggle="modal" data-target="#add-post-modal" class="btn btn-success">New Post</a>
+			</p>
+			<hr>
+			<div id="counter"></div>
+		</div>
+	</header>
+
+	<!--Add Post Modal-->
+	<div id="add-post-modal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">New Post</h4>
 				</div>
-				<div class="margin-top-20">
-					<input id="new-image" type="text" class="form-control" autofocus />
+				<div class="modal-body">
+
+				<form id="new-post">
+					<div class="bold">Image URL</div>
+					<div class="margin-top-20">
+						<input id="new-image" type="text" class="form-control" autofocus />
+					</div>
+					<div class="bold margin-top-20">Title</div>
+					<div class="margin-top-20">
+						<input id="new-title" type="text" class="form-control" />
+					</div>
+					<div class="bold margin-top-20">Body</div>
+					<div class="margin-top-20">
+						<textarea class="form-control" id="new-body" rows="5" placeholder="Describe the game" required></textarea>
+					</div>
 				</div>
-				<div class="bold margin-top-20">
-					Title
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<input type="submit" class="btn btn-success" value="Add Game">
 				</div>
-				<div class="margin-top-20">
-					<input id="new-title" type="text" class="form-control" />
-				</div>
-				<div class="bold margin-top-20">
-					Body
-				</div>
-				<div class="margin-top-20">
-					<textarea class="form-control" id="new-body" rows="5" placeholder="Describe the game" required></textarea>
+				</form>
 				</div>
 			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<input type="submit" class="btn btn-success" value="Add Game">
-			</div>
-			</form>
 		</div>
 	</div>
-</div>
-<!--/Add Post Modal-->
 
 <!-- View Comment Modal -->
 <!-- <div id="view-comment-modal" class="modal fade">
@@ -121,18 +142,15 @@
 		</div>
 	</div>
 </div> -->
-<!--/Add Comment Modal-->
 
-
-
-<!-- Divs to add via underscore -->
+	<!-- Divs to add via underscore -->
 	<div class="container">
 		<div class="row">
 			<div id="post-list"></div>
 		</div>
 	</div>
 
-<!-- Underscore template -->
+	<!-- Underscore template -->
 	<script type="text/template" id="post-template">
 	<div class="post-container">
 		<div class="post panel panel-success" id="post-<%= _id %>" data-id="<%= _id %>"> 
@@ -173,31 +191,6 @@
 		</div>
 	</div>
 	</script>
-
-<!-- Navbar - fixed to top -->
-	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-			<a class="navbar-brand">Sabastian Belser</a>
-		</div>
-
-		<div class="collapse navbar-collapse" id="bs-example-navcollapse-1">
-		<ul class="nav navbar-nav navbar-right">
-			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Info<span class="caret"></span></a>
-				<ul class="dropdown-menu">
-					<li><a href="https://github.com/sswbelser">GitHub</a></li>
-					<li><a href="https://twitter.com/sswbelser">Twitter</a></li>
-					<li><a href="https://www.facebook.com/sswbelser">Facebook</a></li>
-					<li><a href="https://www.linkedin.com/in/sabastianbelser">LinkedIn</a></li>
-					<li role="separator" class="divider"></li>
-					<li><a href="http://www.rockheadandquarry.com/">Rockhead & Quarry, LLC</a></li>
-				</ul>
-			</li>
-		</ul>
-		</div>
-	</div>
-	</nav>
 
 	<!--jQuery-->
 	<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
