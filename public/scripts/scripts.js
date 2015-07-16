@@ -18,7 +18,7 @@ $(function() {
 				_.each(allPosts, function(post) {
 					// pass each post object through template and append to view
 					var $postHtml = $(postsController.template(post));
-					$('#post-list').append($postHtml);
+					$('#post-list').prepend($postHtml);
 				});
 				// add event-handlers to posts for updating/deleting
 				postsController.addEventHandlers();
@@ -29,9 +29,9 @@ $(function() {
 			var postData = {image: newImage, title: newTitle, body: newBody};
 			// send POST request to server to create new post
 			$.post('/api/posts', postData, function(data) {
-				// pass post object through template and append to view
+				// pass post object through template and prepend to view
 				var $postHtml = $(postsController.template(data));
-				$('#post-list').append($postHtml);
+				$('#post-list').prepend($postHtml);
 				totalPosts++;
 				$('#counter').html(totalPosts + ' total posts');
 			});
