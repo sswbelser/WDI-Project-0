@@ -10,6 +10,7 @@ var PostSchema = new Schema({
 });
 var CommentSchema = new Schema({
 	text: String,
+	rating: Number,
 	timestamp: {
 		type: Date,
 		default: Date.now

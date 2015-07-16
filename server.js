@@ -6,6 +6,7 @@ var express = require("express"),
 	bodyParser = require("body-parser"),
 	_ = require("underscore"),
 	mongoose = require("mongoose"),
+	session = require("express-session"),
 	db = require("./models/post");
 
 var Post = require("./models/post")
