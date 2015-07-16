@@ -2,8 +2,8 @@
 
 $(function() {
 
-	var totalPosts = 1
-	$('#counter').html(totalPosts + ' total posts')
+	var totalPosts = 4;
+	$('#counter').html(totalPosts + ' total posts');
 
 	// `postsController` holds all our post funtionality
 	var postsController = {
